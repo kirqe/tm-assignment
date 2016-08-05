@@ -14,12 +14,12 @@
 #   )
 # end
 #
-# states = %w(new started finished)
-# 30.times do
-#   Task.create(
-#     name: FFaker::Lorem.phrase(5),
-#     description: FFaker::Lorem.paragraph,
-#     user_id: Random.new.rand(1..10),
-#     state: states.sample
-#   )
-# end
+states = %w(new started finished)
+30.times do
+  Task.create(
+    name: FFaker::Lorem.phrase(5),
+    description: FFaker::Lorem.paragraph,
+    # user_id: Random.new.rand(1..10),
+    state: states.sample
+  )
+end

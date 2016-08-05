@@ -1,0 +1,24 @@
+
+%table.table.table-condensed
+  %thead
+    %tr
+      %th #
+      %th Name
+      %th Created
+      %th Assigned To
+      %th
+  %tbody
+    - @tasks.each do |task|
+      %tr
+        %td
+          = task.id
+        %td
+          = link_to task.name, task
+        %td
+          .fa.fa-calendar-check-o
+          = task.created_at.strftime('%D')
+        %td
+          "n/a"
+        %td
+          = link_to '#', class: 'btn btn-success btn-xs' do
+            %i.fa.fa-check
