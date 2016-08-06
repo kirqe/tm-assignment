@@ -6,6 +6,15 @@ Rails.application.routes.draw do
 
   scope module: :web do
     resources :tasks, only: [:index, :show]
+
+    resources :users do
+      resources :tasks, only: [:index, :show]
+    end
+
+    namespace :admin do
+      resources :users, :tasks
+    end
+    
     root 'tasks#index'
   end
 end

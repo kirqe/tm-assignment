@@ -1,0 +1,26 @@
+.container
+  .row
+    .col-md-12
+      %table.table.table-condensed
+        %thead
+          %tr
+            %th #
+            %th Email
+            %th Role
+            %th
+        %tbody
+          - @users.each do |user|
+            %tr
+              %td
+                = user.id
+              %td
+                = link_to user.email, admin_user_path(user)
+              %td
+                %span{ class: ("label label-success" if user.role == "admin")}
+                  = user.role
+              %td
+                = link_to '#', class: 'btn btn-primary btn-xs' do
+                  %i.fa.fa-pencil-square-o
+                &nbsp;
+                = link_to '#', class: 'btn btn-danger btn-xs' do
+                  %i.fa.fa-trash
