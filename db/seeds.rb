@@ -9,7 +9,7 @@
 10.times do
   User.create(
     email: FFaker::Internet.email,
-    password: FFaker::Internet.password,
+    password: "complex_password",
     role: "user"
   )
 end
