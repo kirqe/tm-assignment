@@ -2,7 +2,7 @@ language: ruby
 rvm:
  - 2.2.2
 script:
-  - rake db:test:prepare
+  - bundle exec rake db:test:prepare
   - bundle exec rspec spec
 
 notifications:
