@@ -1,4 +1,4 @@
-.container
+.container-fluid
   .row
     .col-md-12
       %table.table.table-condensed
@@ -11,7 +11,7 @@
             %th
         %tbody
           - @tasks.each do |task|
-            %tr
+            %tr{class: ("info" if task.state == "new")}
               %td
                 = task.id
               %td
@@ -22,5 +22,7 @@
               %td
                 = task.user.email
               %td
-                = link_to '#', class: 'btn btn-success btn-xs' do
-                  %i.fa.fa-check
+
+                = state(task)
+                %span{class: 'label label-default check', data: {id: task.id}}
+                  %i.fa.fa-check.fa-fw

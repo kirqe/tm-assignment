@@ -5,16 +5,16 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
 
   scope module: :web do
-    resources :tasks, only: [:index, :show]
+    resources :tasks#, only: [:index, :show]
 
     resources :users do
-      resources :tasks, only: [:index, :show]
+      resources :tasks#, only: [:index, :show, :update]
     end
 
     namespace :admin do
       resources :users, :tasks
     end
-    
+
     root 'tasks#index'
   end
 end
