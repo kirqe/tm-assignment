@@ -11,7 +11,7 @@
             %th
         %tbody
           - @tasks.each do |task|
-            %tr{class: ("info" if task.state == "new")}
+            %tr{class: state_color(task)}
               %td
                 = task.id
               %td
@@ -22,7 +22,4 @@
               %td
                 = task.user.email
               %td
-
-                = state(task)
-                %span{class: 'label label-default check', data: {id: task.id}}
-                  %i.fa.fa-check.fa-fw
+                = task_controlls(task)

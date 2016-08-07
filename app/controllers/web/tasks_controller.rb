@@ -1,5 +1,5 @@
 class Web::TasksController < ApplicationController
-  before_action :set_task, only: [:show, :update]
+  before_action :set_task, only: [:show, :update, :start, :finish]
   def index
     if (params[:user_id])
       @tasks = Task.where(user_id: params[:user_id])
@@ -22,6 +22,14 @@ class Web::TasksController < ApplicationController
         format.json { render json: @task, status: :unprocessable_entity }
       end
     end
+  end
+
+  def start
+    @task.start!
+  end
+
+  def finish
+    @task.finish!
   end
 
   private

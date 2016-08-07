@@ -6,7 +6,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'simple_form'
 gem 'ffaker'
 gem 'hamlit'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
+gem 'aasm'
 
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
