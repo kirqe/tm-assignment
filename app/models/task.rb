@@ -15,4 +15,6 @@ class Task < ApplicationRecord
   end
 
   belongs_to :user
+
+  scope :sort_by_finished, -> { order('state DESC')  }
 end

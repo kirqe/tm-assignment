@@ -6,18 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-10.times do
-  User.create(
-    email: FFaker::Internet.email,
-    password: "complex_password",
-    role: "user"
-  )
-end
+User.create(
+  email: 'admin@example.com',
+  password: "admin12345",
+  role: "admin"
+)
 
-30.times do
-  Task.create(
-    name: FFaker::Lorem.phrase(5),
-    description: FFaker::Lorem.paragraph,
-    user_id: Random.new.rand(1..10)
-  )
-end
+User.create(
+  email: 'user@example.com',
+  password: "user12345",
+  role: "user"
+)

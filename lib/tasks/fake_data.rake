@@ -5,7 +5,7 @@ desc 'add10 users and 30 tasks'
     10.times do
       User.create(
         email: FFaker::Internet.email,
-        password: "complex_password",
+        password: "user12345",
         role: "user"
       )
     end

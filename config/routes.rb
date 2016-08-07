@@ -1,19 +1,18 @@
 Rails.application.routes.draw do
 
-  get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
 
   scope module: :web do
-    resources :tasks do
+    resources :tasks, only: [:index, :show] do
       member do
         put :start
         put :finish
       end
-    end#, only: [:index, :show]
+    end
 
     resources :users do
-      resources :tasks#, only: [:index, :show, :update]
+      resources :tasks, only: [:index, :show, :update]
     end
 
     namespace :admin do

@@ -23,6 +23,7 @@ $(document).on("turbolinks:load", function(){
       var task = $(this);
       var task_id = task.data("id")
       var aasm_event = task.data("aasm-event")
+      
       console.log(task_id);
       task.toggleClass("label-success label-default")
       task.fadeOut();
@@ -36,7 +37,7 @@ $(document).on("turbolinks:load", function(){
         success: function(data){
           console.log("ee")
         }
-      })
-    })
+      });
+    });
   });
-})
+});
