@@ -1,3 +1,10 @@
 body{
   background-color: #ebebeb;
+  padding-top: 70px; 
+}
+
+.hidden{
+  display: none;
+  position: absolute;
+  left: -999em;
 }
