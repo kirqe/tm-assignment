@@ -1,4 +1,5 @@
 class Web::TasksController < ApplicationController
+  before_filter :authenticate_user
   before_action :set_task, only: [:show, :update, :start, :finish]
   def index
     if (params[:user_id])

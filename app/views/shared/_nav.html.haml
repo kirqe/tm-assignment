@@ -32,17 +32,3 @@
               -# %li.divider{:role => "separator"}
               %li
                 = link_to 'Log out', logout_path
-        - else
-          .col-md-12
-            = simple_form_for(:session, url: login_path, html: {class: 'navbar-form navbar-right'}) do |f|
-              .form-group
-                .input-group
-                  %span.input-group-addon
-                    %i.glyphicon.glyphicon-user
-                  = f.input :email, label: false, placeholder: 'Email'
-              .form-group
-                .input-group
-                  %span.input-group-addon
-                    %i.glyphicon.glyphicon-lock
-                  = f.input :password, label: false, placeholder: 'Password'
-              = f.submit 'Login', class: 'btn btn-primary'

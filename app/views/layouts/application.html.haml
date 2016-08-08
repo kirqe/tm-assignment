@@ -6,18 +6,16 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    = render 'shared/nav'
+    - unless controller_name == 'sessions'
+      = render 'shared/nav'
     -# delete this
     - unless current_user
-      .container-fluid
+      .container
         .alert.alert-warning
           %b Admin:
           admin@example.com / admin12345
           |
           %b User:
           user@example.com / user12345
-          |
-          %b Notice:
-          password 'user12345' is the same for all the fake users below :)
     -# end delete this
     = yield
