@@ -21,7 +21,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'rails-controller-testing'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
 end
@@ -34,7 +35,7 @@ group :development do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-# 
+#
 # # still using 10.8.5 -_-
 # require 'rbconfig'
 # if RbConfig::CONFIG['target_os'] =~ /darwin(1[0-3])/i
