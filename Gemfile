@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 5.0.0'
-gem 'sqlite3'
+gem 'pg'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'simple_form'
 gem 'ffaker'
@@ -20,6 +20,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5'
   gem 'rails-controller-testing'
