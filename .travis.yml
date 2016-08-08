@@ -1,13 +1,17 @@
 language: ruby
 rvm:
- - 2.2.2
+- 2.2.2
 script:
-  - export RAILS_ENV=test
-  - bundle exec rake db:create db:schema:load db:test:prepare
-  - bundle exec rspec
+- export RAILS_ENV=test
+- bundle exec rake db:create db:schema:load db:test:prepare
+- bundle exec rspec
 before_script:
-  - psql -c 'create database tm_test;' -U postgres
+- psql -c 'create database tm_test;' -U postgres
 services:
-  - postgresql
+- postgresql
 notifications:
   email: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: Gd/x+QcGi587uWKZj/70xxmIQzniP5dYCNO842imWJpo8jR6DE7Fgyr83gr+KWSIYqkiRHtXcfyh536kFHveTu9ri4/atcF85617QCe7s/nvGB1cIgidSjJ4grmwsdlSDtKXoYnMK3F2C43mNUguIEkpeqdI2gW9BHPnwRRm+6J8sVn5F9PvTG6h74R/OfsrYygPUeCtswp0ECzZB3AQXbhrS2kESjsOigT5gcZGNTstWWZ+SGGDo9VCKBE4HnGoFGR6SK4KYFU8ks6JnimMJ/snaFHP4QcS9Ter5yKYlIMt5oRBraVdE7w07DOEC/fUW9Rvwd1iQLW/ksaJk2hTr2BAzcCoL2RiKkc6KHTwhEfeEQtuLWZu3yLmspgwYBAU57veVupzXMmJ2a3LVeB2BHHm5lS0c5YqKboTFNImk4oc4TRbUzNq3IT2K1V3emIDACYmbFfJS/vaZk6R1eHXBMJO0pqx9ovc7N2cxkzOrESAFha8n23axrDwqtGkdcFSufJJn8DvY7v4TjA/I+vHo7y61lBeoI0+2EJHS4rXR/v22wKOL8nF9PMXef3dXeCIs/BL7otLC5aCKlLs/7Xzq+0iMPekxBHxofpTm9NWIPjdOH/k6kNPPANDE7Wvg3fDpOawIv7kbkKwGpZSrzruHJb0ZMec014BeUFyzEwNE3w=
