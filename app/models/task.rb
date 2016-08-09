@@ -1,5 +1,6 @@
 class Task < ApplicationRecord
   include AASM
+  mount_uploader :attachment, AttachmentUploader
 
   aasm :column => 'state' do
     state :new, :initial => :true

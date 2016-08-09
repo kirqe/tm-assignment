@@ -47,6 +47,6 @@ class Web::TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :description, :state)
+    params.require(:task).permit(:name, :description, :state, :attachment)
   end
 end

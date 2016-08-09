@@ -8,6 +8,7 @@ gem 'ffaker'
 gem 'hamlit'
 gem 'font-awesome-rails'
 gem 'aasm'
+gem 'carrierwave'
 
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
