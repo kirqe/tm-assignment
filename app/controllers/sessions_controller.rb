@@ -1,7 +1,11 @@
 class SessionsController < ApplicationController
-  include SessionsHelper
-
+  
   def new
+    if (logged_in? && admin?)
+      redirect_to admin_dashboard_tasks_path
+    else
+      redirect_to dashboard_tasks_path
+    end
   end
 
   def create

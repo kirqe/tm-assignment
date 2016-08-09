@@ -1,7 +1,9 @@
 class Web::User::Dashboard::TasksController < ApplicationController
   before_filter :authenticate_user
   before_action :set_task, only: [:show, :start, :finish]
+  
   def index
+    redirect_to admin_dashboard_tasks_path if admin?
     if (params[:user_id])
       @tasks = Task.where(user_id: params[:user_id]).page params[:page]
     else
