@@ -3,7 +3,7 @@ class Web::Admin::Dashboard::TasksController < ApplicationController
   before_action :set_task, only: [:show, :update, :start, :finish]
 
   def index
-    @tasks = Task.all
+    @tasks = Task.all.page params[:page]
   end
 
   def show

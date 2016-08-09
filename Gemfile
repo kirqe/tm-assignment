@@ -10,6 +10,7 @@ gem 'font-awesome-rails'
 gem 'aasm'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'kaminari', github: 'amatsuda/kaminari', branch: '0-17-stable'
 
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'

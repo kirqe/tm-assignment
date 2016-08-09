@@ -4,24 +4,22 @@
       %table.table.table-condensed
         %thead
           %tr
-            - if @current_user.is_admin?
-              %th e
-              %th d
+            %th{width: '5px'} e
+            %th{width: '5px'} d
             %th #
             %th Name
-            %th.hidden-xs Created
+            %th.hidden-xs{width: '100px'} Created
             %th.hidden-xs Assigned To
             %th
         %tbody
           - @tasks.each do |task|
             %tr{class: ("#{state_color(task)}")}
-              - if @current_user.is_admin?
-                %td
-                  = link_to '#' do
-                    %i.fa.fa-pencil-square-o
-                %td
-                  = link_to '#' do
-                    %i.fa.fa-times
+              %td
+                = link_to '#' do
+                  %i.fa.fa-pencil-square-o
+              %td
+                = link_to '#' do
+                  %i.fa.fa-times
               %td
                 = task.id
               %td
@@ -33,3 +31,4 @@
                 = task.user.email
               %td.hidden-xs
                 = task_controlls(task)
+      = paginate @tasks

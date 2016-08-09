@@ -3,9 +3,9 @@ class Web::User::Dashboard::TasksController < ApplicationController
   before_action :set_task, only: [:show, :start, :finish]
   def index
     if (params[:user_id])
-      @tasks = Task.where(user_id: params[:user_id])
+      @tasks = Task.where(user_id: params[:user_id]).page params[:page]
     else
-      @tasks = Task.all
+      @tasks = Task.all.page params[:page]
     end
   end
 
@@ -29,7 +29,6 @@ class Web::User::Dashboard::TasksController < ApplicationController
   end
 
   def show
-
   end
 
   def start
