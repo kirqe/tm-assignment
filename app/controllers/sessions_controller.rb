@@ -8,7 +8,11 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email])
     if user && user.authenticate(params[:session][:password])
       log_in user
-      redirect_to user_tasks_path(user)
+      if user.is_admin?
+        redirect_to tasks_path
+      else
+        redirect_to user_tasks_path(user)
+      end
     else
       render 'new'
     end

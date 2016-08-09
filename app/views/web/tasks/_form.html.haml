@@ -1,0 +1,9 @@
+= simple_form_for(@task, html: { multipart: true }) do |f|
+  = f.input :name, placeholder: "task name"
+  = f.input :description, as: :text, input_html: { rows: 7 }, placeholder: "task description"
+  = f.input :attachment, as: :file
+  - if @current_user.is_admin?
+    = f.input :user_id, collection: User.all.map {|u| [u.email, u.id]}, prompt: "assign to", label: false
+  - else
+    = f.input :user_id, as: :hidden, input_html: { value: @current_user.id}
+  = f.button :submit, class: 'btn btn-primary'

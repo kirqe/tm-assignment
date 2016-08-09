@@ -15,5 +15,8 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     process :resize_to_fit => [700, 400]
   end
 
+  def extension_white_list
+    %w(pdf doc docx jpg jpeg gif png)
+  end
 
 end

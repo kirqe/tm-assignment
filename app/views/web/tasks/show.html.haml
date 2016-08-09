@@ -6,6 +6,8 @@
         = @task.name
       %p
         = @task.description
+      %p
+        = image_tag(@task.attachment_url) if @task.attachment.present?
 
     .col-md-5
       %h4
@@ -13,5 +15,5 @@
       %h4
         = @task.user.email
       %h4
-        added: 
+        added:
         = @task.created_at.strftime('%D')

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
 
   scope module: :web do
-    resources :tasks, only: [:index, :show] do
+    resources :tasks, only: [:index, :show, :new, :create] do
       member do
         put :start
         put :finish

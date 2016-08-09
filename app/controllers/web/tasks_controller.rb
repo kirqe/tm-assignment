@@ -9,6 +9,25 @@ class Web::TasksController < ApplicationController
     end
   end
 
+  def new
+    @task = Task.new
+  end
+
+  def create
+    @task = Task.new(task_params)
+    @task.user_id = @current_user.id
+
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to @task }
+        format.json { render json: @task }
+      else
+        format.html { render 'new' }
+        format.json { render json: @task.errorsk, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def show
   end
 
