@@ -2,21 +2,18 @@ module TasksHelper
   def task_controlls(task)
     status_label = content_tag :span, task.state, class: "label label-#{state_color(task)} state"
 
-    controlls = content_tag :span do
-                  if task.state == 'new'
-                    aasm_event = 'start'
-                    icon = 'fa-play'
-                    hidden = 'visible'
-                  elsif task.state == 'started'
-                    aasm_event = 'finish'
-                    icon = 'fa-check'
-                    hidden = 'visible'
-                  else
-                    hidden = 'hidden'
-                  end
-                  content_tag :span, class: "label label-default check #{hidden}", data: {id: task.id, aasm_event: "#{aasm_event}"} do
-                    content_tag :i, '', class: "fa #{icon} fa-fw"
-                  end
+    if task.state == 'new'
+      aevent = 'start'
+      icon = 'fa-play'
+    elsif task.state == 'started'
+      aevent = 'finish'
+      icon = 'fa-check'
+    else
+      hidden = 'hidden'
+    end
+
+    controlls = content_tag :a, class: "label label-default check #{hidden}", data: {id: task.id, aevent: "#{aevent}"} do
+                  content_tag :i, '', class: "fa #{icon} fa-fw"
                 end
 
     status_label + " " + controlls

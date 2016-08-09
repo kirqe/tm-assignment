@@ -15,29 +15,3 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
-
-
-$(document).on("turbolinks:load", function(){
-  $(function() {
-    $(".check").on("click", function() {
-      var task = $(this);
-      var task_id = task.data("id")
-      var aasm_event = task.data("aasm-event")
-      
-      console.log(task_id);
-      task.toggleClass("label-success label-default")
-      task.fadeOut();
-
-      $.ajax({
-        type: 'PUT',
-        url: '/tasks/' + task_id + "/" + aasm_event,
-        // data: { task: { state: 'finished' }, _method:'PUT' },
-
-        dataType: 'json',
-        success: function(data){
-          console.log("ee")
-        }
-      });
-    });
-  });
-});

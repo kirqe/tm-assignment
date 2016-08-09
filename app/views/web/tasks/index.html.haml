@@ -11,7 +11,7 @@
             %th
         %tbody
           - @tasks.each do |task|
-            %tr{class: state_color(task)}
+            %tr{class: ("#{state_color(task)}")}
               %td
                 = task.id
               %td
