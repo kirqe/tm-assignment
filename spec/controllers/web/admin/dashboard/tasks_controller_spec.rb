@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Web::TasksController, :type => :controller do
+RSpec.describe Web::Admin::Dashboard::TasksController, :type => :controller do
   describe "GET index" do
     context "user authenticated" do
 
