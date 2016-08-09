@@ -6,8 +6,11 @@
         = @task.name
       %p
         = @task.description
+      %br
       %p
-        = image_tag(@task.attachment_url) if @task.attachment.present?
+        %h4 Attachment
+        = link_to @task.attachment_url do
+          = image_tag(@task.attachment_url, class: 'task-img') if @task.attachment.present?
 
     .col-md-5
       %h4

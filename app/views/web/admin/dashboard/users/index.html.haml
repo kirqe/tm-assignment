@@ -1,6 +1,7 @@
 .container
   .row
     .col-md-12
+      = link_to 'Add new user', new_admin_dashboard_user_path, class: 'btn btn-primary'
       %table.table.table-condensed
         %thead
           %tr
@@ -19,9 +20,9 @@
                 %span{ class: ("label label-success" if user.role == "admin")}
                   = user.role
               %td
-                = link_to '#', class: 'btn btn-primary btn-xs' do
+                = link_to edit_admin_dashboard_user_path(user), class: 'btn btn-primary btn-xs' do
                   %i.fa.fa-pencil-square-o
                 &nbsp;
-                = link_to '#', class: 'btn btn-danger btn-xs' do
+                = link_to admin_dashboard_user_path(user), method: :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-danger btn-xs' do
                   %i.fa.fa-trash
       = paginate @users

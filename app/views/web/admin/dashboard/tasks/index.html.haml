@@ -15,10 +15,10 @@
           - @tasks.each do |task|
             %tr{class: ("#{state_color(task)}")}
               %td
-                = link_to '#' do
+                = link_to edit_admin_dashboard_task_path(task) do
                   %i.fa.fa-pencil-square-o
               %td
-                = link_to '#' do
+                = link_to admin_dashboard_task_path(task), method: :delete, data: {confirm: "Are you sure?"} do
                   %i.fa.fa-times
               %td
                 = task.id
@@ -28,7 +28,7 @@
                 .fa.fa-calendar-check-o
                 = task.created_at.strftime('%D')
               %td.hidden-xs
-                = task.user.email
+                = link_to task.user.email, admin_dashboard_user_tasks_path(task.user)
               %td.hidden-xs
                 = task_controlls(task)
       = paginate @tasks

@@ -10,11 +10,6 @@ class AttachmentUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-
-  version :preview do
-    process :resize_to_fit => [700, 400]
-  end
-
   def extension_white_list
     %w(pdf doc docx jpg jpeg gif png)
   end

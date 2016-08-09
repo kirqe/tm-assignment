@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   scope module: :web do
     namespace :admin do
       namespace :dashboard do
-        resources :users
+        resources :users do
+          resources :tasks
+        end
         resources :tasks
       end
     end

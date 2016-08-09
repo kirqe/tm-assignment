@@ -1,4 +1,14 @@
 .container
   .row
     .col-md-5
+      %h3
+        Email:
+        = @user.email
+      %h3
+        Role:
+        = @user.role
+      %h3
+        Created at:
+        = @user.created_at.strftime("%D")
+
     .col-md-7

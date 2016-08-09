@@ -1,0 +1,5 @@
+= simple_form_for([:admin, :dashboard, @user]) do |f|
+  = f.input :email, placeholder: "New user rmail"
+  = f.input :password, placeholder: "New user password"
+  = f.input :role, collection: [:user, :admin], selected: :user
+  = f.button :submit, class: 'btn btn-primary'
