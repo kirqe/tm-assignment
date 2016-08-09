@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       if user.is_admin?
-        redirect_to dashboard_tasks_path
+        redirect_to admin_dashboard_tasks_path
       else
         redirect_to dashboard_tasks_path(user)
       end

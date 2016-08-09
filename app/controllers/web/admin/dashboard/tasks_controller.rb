@@ -1,5 +1,4 @@
-class Web::Admin::Dashboard::TasksController < ApplicationController
-  before_filter :authenticate_user
+class Web::Admin::Dashboard::TasksController < Web::Admin::AdminController
   before_action :set_task, only: [:show, :update, :start, :finish]
 
   def index
