@@ -1,6 +1,7 @@
 class Web::Admin::Dashboard::TasksController < Web::Admin::AdminController
   before_action :set_task, only: [:show, :update, :start, :finish]
-
+  before_action :authenticate_user
+  before_filter :authorize_user
   def index
     @tasks = Task.all.page params[:page]
   end
@@ -23,22 +24,6 @@ class Web::Admin::Dashboard::TasksController < Web::Admin::AdminController
         format.html { render 'new' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  def start
-    if (@task.user == current_user || @current_user.is_admin?)
-      @task.start!
-    else
-      render json: @task, status: :unprocessable_entity
-    end
-  end
-
-  def finish
-    if (@task.user == current_user || @current_user.is_admin?)
-      @task.finish!
-    else
-      render json: @task, status: :unprocessable_entity
     end
   end
 

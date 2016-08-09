@@ -1,11 +1,7 @@
 class SessionsController < ApplicationController
-  
+
   def new
-    if (logged_in? && admin?)
-      redirect_to admin_dashboard_tasks_path
-    else
-      redirect_to dashboard_tasks_path
-    end
+    redirect_to root_url if logged_in?
   end
 
   def create
