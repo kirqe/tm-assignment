@@ -26,11 +26,19 @@ class Web::TasksController < ApplicationController
   end
 
   def start
-    @task.start!
+    if (@task.user == current_user || @current_user.is_admin?)
+      @task.start!
+    else
+      render json: @task, status: :unprocessable_entity
+    end
   end
 
   def finish
-    @task.finish!
+    if (@task.user == current_user || @current_user.is_admin?)
+      @task.finish!
+    else
+      render json: @task, status: :unprocessable_entity
+    end
   end
 
   private

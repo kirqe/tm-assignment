@@ -15,8 +15,12 @@ module TasksHelper
     controlls = content_tag :a, class: "label label-default check #{hidden}", data: {id: task.id, aevent: "#{aevent}"} do
                   content_tag :i, '', class: "fa #{icon} fa-fw"
                 end
-
-    status_label + " " + controlls
+                
+    if (task.user == current_user || @current_user.is_admin?)
+      status_label + " " + controlls
+    else
+      status_label
+    end
   end
 
   def state_color(task)
