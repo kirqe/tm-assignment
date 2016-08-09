@@ -9,9 +9,9 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       if user.is_admin?
-        redirect_to tasks_path
+        redirect_to dashboard_tasks_path
       else
-        redirect_to user_tasks_path(user)
+        redirect_to dashboard_tasks_path(user)
       end
     else
       render 'new'
@@ -20,6 +20,6 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
-    redirect_to tasks_path
+    redirect_to dashboard_tasks_path
   end
 end

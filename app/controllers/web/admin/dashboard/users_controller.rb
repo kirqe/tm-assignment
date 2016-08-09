@@ -1,4 +1,4 @@
-class Web::Admin::UsersController < ApplicationController
+class Web::Admin::Dashboard::UsersController < ApplicationController
   before_action :set_user, only: [:show]
 
   def index

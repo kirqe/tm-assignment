@@ -1,6 +1,6 @@
-class Web::TasksController < ApplicationController
+class Web::User::Dashboard::TasksController < ApplicationController
   before_filter :authenticate_user
-  before_action :set_task, only: [:show, :update, :start, :finish]
+  before_action :set_task, only: [:show, :start, :finish]
   def index
     if (params[:user_id])
       @tasks = Task.where(user_id: params[:user_id])
@@ -19,7 +19,7 @@ class Web::TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task }
+        format.html { redirect_to dashboard_user_task_path(@task.user_id, @task) }
         format.json { render json: @task }
       else
         format.html { render 'new' }
@@ -29,19 +29,7 @@ class Web::TasksController < ApplicationController
   end
 
   def show
-  end
 
-  def update
-    respond_to do |format|
-      if @task.update_attributes(task_params)
-        format.html
-        format.js
-        format.json { render json: @task, notice: 'updated'}
-      else
-        format.js
-        format.json { render json: @task, status: :unprocessable_entity }
-      end
-    end
   end
 
   def start

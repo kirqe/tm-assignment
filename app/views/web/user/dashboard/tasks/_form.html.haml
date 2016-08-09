@@ -1,4 +1,4 @@
-= simple_form_for(@task, html: { multipart: true }) do |f|
+= simple_form_for([:dashboard, @task], html: { multipart: true }) do |f|
   = f.input :name, placeholder: "task name"
   = f.input :description, as: :text, input_html: { rows: 7 }, placeholder: "task description"
   = f.input :attachment, as: :file

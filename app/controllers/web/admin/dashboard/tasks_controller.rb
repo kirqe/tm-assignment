@@ -1,9 +1,12 @@
-class Web::Admin::TasksController < ApplicationController
+class Web::Admin::Dashboard::TasksController < ApplicationController
   before_filter :authenticate_user
   before_action :set_task, only: [:show, :update, :start, :finish]
 
   def index
     @tasks = Task.all
+  end
+
+  def show
   end
 
   def new
@@ -15,16 +18,29 @@ class Web::Admin::TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task }
+        format.html { redirect_to admin_dashboard_task_path(@task) }
         format.json { render json: @task }
       else
         format.html { render 'new' }
-        format.json { render json: @task.errorsk, status: :unprocessable_entity }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  def show
+  def start
+    if (@task.user == current_user || @current_user.is_admin?)
+      @task.start!
+    else
+      render json: @task, status: :unprocessable_entity
+    end
+  end
+
+  def finish
+    if (@task.user == current_user || @current_user.is_admin?)
+      @task.finish!
+    else
+      render json: @task, status: :unprocessable_entity
+    end
   end
 
   private

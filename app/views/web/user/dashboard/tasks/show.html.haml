@@ -1,0 +1,19 @@
+.container
+  .row
+    .col-md-7
+      %h4
+        = @task.id
+        = @task.name
+      %p
+        = @task.description
+      %p
+        = image_tag(@task.attachment_url) if @task.attachment.present?
+
+    .col-md-5
+      %h4
+        = @task.state
+      %h4
+        = @task.user.email
+      %h4
+        added:
+        = @task.created_at.strftime('%D')

@@ -11,16 +11,22 @@
     / Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li
-          = link_to '+ New Task', tasks_path
         - if logged_in?
-          %li
-            = link_to 'My Tasks', user_tasks_path(current_user)
-        %li
-          = link_to 'All Tasks', tasks_path
-        - if admin?
-          %li
-            = link_to 'Users', admin_users_path
+          - if admin?
+            %li
+              = link_to '+ New Task', new_admin_dashboard_task_path
+            %li
+              = link_to 'All Tasks', admin_dashboard_tasks_path
+            %li
+              = link_to 'Users', admin_dashboard_users_path
+          - else
+            %li
+              = link_to '+ New Task', new_dashboard_user_task_path
+            %li
+              = link_to 'My Tasks', dashboard_user_tasks_path(@current_user)
+            %li
+              = link_to 'All Tasks', dashboard_tasks_path
+
 
       %ul.nav.navbar-nav.navbar-right
         - if current_user

@@ -25,7 +25,7 @@
               %td
                 = task.id
               %td
-                = link_to task.name, task
+                = link_to task.name, admin_dashboard_task_path(task)
               %td.hidden-xs
                 .fa.fa-calendar-check-o
                 = task.created_at.strftime('%D')

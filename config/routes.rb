@@ -4,21 +4,38 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
 
   scope module: :web do
-    resources :tasks, only: [:index, :show, :new, :create] do
-      member do
-        put :start
-        put :finish
+    # resources :tasks, only: [:index, :show, :new, :create] do
+    #   member do
+    #     put :start
+    #     put :finish
+    #   end
+    # end
+    #
+    # resources :users do
+    #   resources :tasks, only: [:index, :show, :update]
+    # end
+
+    namespace :admin do
+      namespace :dashboard do
+        resources :users
+        resources :tasks
       end
     end
 
-    resources :users do
-      resources :tasks, only: [:index, :show, :update]
+    scope module: :user do
+      namespace :dashboard do
+        resources :tasks
+        resources :users do
+          resources :tasks do
+            member do
+              put :start
+              put :finish
+            end
+          end
+        end
+      end
     end
 
-    namespace :admin do
-      resources :users, :tasks
-    end
 
-    root 'tasks#index'
   end
 end
