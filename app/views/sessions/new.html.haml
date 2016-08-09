@@ -1,5 +1,5 @@
 = simple_form_for(:session, url: login_path, html: {class: 'form-signin'}) do |f|
-  %h2.form-signin-heading Please sign in
+  %h2.form-signin-heading Please login
   = f.input :email, label: false, placeholder: 'Email'
   = f.input :password, label: false, placeholder: 'Password'
   = f.submit 'Login', class: 'btn btn-lg btn-primary btn-block'
