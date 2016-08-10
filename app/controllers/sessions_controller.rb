@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
         redirect_to dashboard_tasks_path(user)
       end
     else
+      flash[:danger] = 'Invalid email or password'
       render 'new'
     end
   end

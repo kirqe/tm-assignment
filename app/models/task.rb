@@ -16,6 +16,8 @@ class Task < ApplicationRecord
   end
 
   belongs_to :user
+  validates :name, presence: true, length: {in: 3..100}
+  validates :description, presence: true, length: {in: 3..10000}
 
   scope :sort_by_finished, -> { order('state DESC')  }
 end

@@ -8,6 +8,7 @@
   %body
     - unless controller_name == 'sessions'
       = render 'shared/nav'
+    = render 'shared/alerts'
     -# delete this
     - unless current_user
       .container
