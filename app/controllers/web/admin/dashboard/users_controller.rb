@@ -1,7 +1,5 @@
 class Web::Admin::Dashboard::UsersController < Web::Admin::AdminController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user
-  before_filter :authorize_user
 
   def index
     @users = User.order(:role).order('created_at DESC').page params[:page]

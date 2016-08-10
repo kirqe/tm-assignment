@@ -1,7 +1,5 @@
 class Web::Admin::Dashboard::TasksController < Web::Admin::AdminController
   before_action :set_task, only: [:show, :update, :destroy]
-  before_action :authenticate_user
-  before_filter :authorize_user
 
   def index
     if (params[:user_id])
