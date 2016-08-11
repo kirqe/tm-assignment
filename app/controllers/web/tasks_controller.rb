@@ -7,7 +7,7 @@ class Web::TasksController < ApplicationController
         if admin?
           redirect_to admin_dashboard_tasks_path
         else
-          redirect_to dashboard_tasks_path
+          redirect_to dashboard_user_tasks_path(@current_user)
         end
       end
     end

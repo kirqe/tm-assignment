@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       if user.is_admin?
         redirect_to admin_dashboard_tasks_path
       else
-        redirect_to dashboard_tasks_path(user)
+        redirect_to dashboard_user_tasks_path(user)
       end
     else
       flash[:danger] = 'Invalid email or password'
