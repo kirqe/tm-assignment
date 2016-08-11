@@ -8,12 +8,12 @@
 
 User.create(
   email: 'admin@example.com',
-  password: "admin12345",
-  role: "admin"
+  password: 'admin12345',
+  role: 'admin'
 )
 
 User.create(
   email: 'user@example.com',
-  password: "user12345",
-  role: "user"
+  password: 'user12345',
+  role: 'user'
 )

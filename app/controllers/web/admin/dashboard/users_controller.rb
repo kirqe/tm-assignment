@@ -16,7 +16,7 @@ class Web::Admin::Dashboard::UsersController < Web::Admin::AdminController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
-        format.html { redirect_to admin_dashboard_user_path(@user) }
+        format.html { redirect_to admin_dashboard_user_path(@user), notice: "User's added successfully" }
         format.json { render json: @user }
       else
         format.html { render 'new' }
@@ -31,7 +31,7 @@ class Web::Admin::Dashboard::UsersController < Web::Admin::AdminController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to admin_dashboard_user_path(@user) }
+        format.html { redirect_to admin_dashboard_user_path(@user), notice: "User's updated successfully" }
         format.json { render json: @user }
       else
         format.html { render 'edit' }
@@ -43,7 +43,7 @@ class Web::Admin::Dashboard::UsersController < Web::Admin::AdminController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to admin_dashboard_users_path }
+      format.html { redirect_to admin_dashboard_users_path, notice: "User's deleted successfully" }
       format.json { head :no_content }
     end
   end

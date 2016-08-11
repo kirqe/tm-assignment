@@ -21,7 +21,7 @@ class Web::Admin::Dashboard::TasksController < Web::Admin::AdminController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to admin_dashboard_task_path(@task) }
+        format.html { redirect_to admin_dashboard_task_path(@task), notice: "Task's added successfully" }
         format.json { render json: @task }
       else
         format.html { render 'new' }
@@ -37,7 +37,7 @@ class Web::Admin::Dashboard::TasksController < Web::Admin::AdminController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to admin_dashboard_task_path(@task) }
+        format.html { redirect_to admin_dashboard_task_path(@task), notice: "Task's updated successfully" }
         format.json { render json: @task }
       else
         format.html { render 'edit' }
@@ -49,7 +49,7 @@ class Web::Admin::Dashboard::TasksController < Web::Admin::AdminController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to admin_dashboard_tasks_path }
+      format.html { redirect_to admin_dashboard_tasks_path, notice: "Task's deleted successfully" }
       format.json { head :no_content }
     end
   end

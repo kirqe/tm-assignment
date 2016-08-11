@@ -9,14 +9,20 @@
     - unless controller_name == 'sessions'
       = render 'shared/nav'
     = render 'shared/alerts'
+    
     -# delete this
     - unless current_user
-      .container
+      .container-fluid
         .alert.alert-warning
           %b Admin:
-          admin@example.com / admin12345
-          |
-          %b User:
-          user@example.com / user12345
+          admin@example.com | admin12345
+          %br/
+          %b User with highest number of tasks from fake_data.rake:
+          = Task.order('user').first.user.email
+          | user12345
+          %br/
+          %b User from seeds.rb without tasks:
+          user@example.com | user12345
     -# end delete this
+
     = yield
