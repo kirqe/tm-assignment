@@ -24,7 +24,7 @@
                 = task.id
               %td
                 = link_to task.name, admin_dashboard_task_path(task)
-                = has_attachmet?(task)
+                = has_attachment?(task)
               %td.hidden-xs
                 .fa.fa-calendar-check-o
                 = task.created_at.strftime('%D')

@@ -49,7 +49,7 @@ module TasksHelper
     end
   end
 
-  def has_attachmet?(task)
+  def has_attachment?(task)
     if task.attachment.present?
       link_to task.attachment_url do
         content_tag :i, '', class: 'fa fa-paperclip'
