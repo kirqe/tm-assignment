@@ -15,7 +15,7 @@ module TasksHelper
     controlls = content_tag :a, class: "label label-default check #{hidden}", data: {id: task.id, aevent: "#{aevent}"} do
                   content_tag :i, '', class: "fa #{icon} fa-fw"
                 end
-                
+
     if (task.user == current_user || @current_user.is_admin?)
       status_label + " " + controlls
     else
@@ -31,6 +31,30 @@ module TasksHelper
       "success"
     when "finished"
       "default"
+    end
+  end
+
+  def attachment(task)
+    file = %w(pdf doc docx)
+    image = %w(jpg jpeg gif png)
+    file_ext = task.attachment.file.extension
+
+    if task.attachment.present?
+      if image.include?(file_ext)
+        link_to task.attachment_url do
+          image_tag task.attachment_url
+        end
+      else
+        link_to 'Download the attachment', task.attachment_url
+      end
+    end
+  end
+
+  def has_attachmet?(task)
+    if task.attachment.present?
+      link_to task.attachment_url do
+        content_tag :i, '', class: 'fa fa-paperclip'
+      end
     end
   end
 end

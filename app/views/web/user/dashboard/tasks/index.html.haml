@@ -15,6 +15,7 @@
                 = task.id
               %td
                 = link_to task.name, dashboard_user_task_path(task.user_id, task)
+                = has_attachmet?(task)
               %td.hidden-xs
                 .fa.fa-calendar-check-o
                 = task.created_at.strftime('%D')

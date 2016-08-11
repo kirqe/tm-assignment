@@ -53,7 +53,7 @@ RSpec.describe Web::TasksController, :type => :controller do
       end
     end
 
-    context "when task doesn't belongs to the current user" do
+    context "when task doesn't belong to the current user" do
       before(:each) do
         login_as(user2)
       end
@@ -93,7 +93,7 @@ RSpec.describe Web::TasksController, :type => :controller do
       end
     end
 
-    context "when task doesn't belongs to the current user" do
+    context "when task doesn't belong to the current user" do
       before(:each) do
         login_as(user2)
       end

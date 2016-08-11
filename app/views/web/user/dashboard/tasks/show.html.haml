@@ -7,7 +7,7 @@
       %p
         = @task.description
       %p
-        = image_tag(@task.attachment_url) if @task.attachment.present?
+        = attachment(@task)
 
     .col-md-5
       %h4
