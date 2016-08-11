@@ -37,10 +37,9 @@ module TasksHelper
   def attachment(task)
     file = %w(pdf doc docx)
     image = %w(jpg jpeg gif png)
-    file_ext = task.attachment.file.extension
 
     if task.attachment.present?
-      if image.include?(file_ext)
+      if image.include?(task.attachment.file.extension)
         link_to task.attachment_url do
           image_tag task.attachment_url
         end
