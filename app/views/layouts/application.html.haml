@@ -1,6 +1,7 @@
 !!!
 %html
   %head
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %title Tm
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -9,7 +10,7 @@
     - unless controller_name == 'sessions'
       = render 'shared/nav'
     = render 'shared/alerts'
-    
+
     -# delete this
     - unless current_user
       .container-fluid
