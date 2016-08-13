@@ -23,6 +23,7 @@
                 = link_to edit_admin_dashboard_user_path(user), class: 'btn btn-primary btn-xs' do
                   %i.fa.fa-pencil-square-o
                 &nbsp;
-                = link_to admin_dashboard_user_path(user), method: :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-danger btn-xs' do
-                  %i.fa.fa-trash
+                - unless user.is_admin?
+                  = link_to admin_dashboard_user_path(user), method: :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-danger btn-xs' do
+                    %i.fa.fa-trash
       = paginate @users

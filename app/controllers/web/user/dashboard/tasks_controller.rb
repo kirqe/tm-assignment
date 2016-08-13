@@ -23,7 +23,7 @@ class Web::User::Dashboard::TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to dashboard_user_task_path(@task.user_id, @task), notice: "Task's added successfully" }
+        format.html { redirect_to dashboard_user_task_path(@task.user_id, @task), notice: "Task was successfully created." }
         format.json { render json: @task }
       else
         format.html { render 'new' }
