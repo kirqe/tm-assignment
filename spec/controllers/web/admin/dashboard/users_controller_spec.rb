@@ -21,12 +21,12 @@ RSpec.describe Web::Admin::Dashboard::UsersController, :type => :controller do
 
   describe "GET #show" do
     it "assigns the selected user to @user" do
-      get :show, id: user
+      get :show, params: { id: user }
       expect(assigns(:user)).to eq(user)
     end
 
     it "renders :show view" do
-      get :show, id: user
+      get :show, params: { id: user }
       expect(response).to render_template('show')
     end
   end
@@ -47,12 +47,12 @@ RSpec.describe Web::Admin::Dashboard::UsersController, :type => :controller do
     context "when user attributes are valid" do
       it "creates a new user" do
         expect{
-          post :create, user: FactoryGirl.attributes_for(:user)
+          post :create, params: { user: FactoryGirl.attributes_for(:user) }
         }.to change(User, :count).by(1)
       end
 
       it "redirects to created user page" do
-        post :create, user: FactoryGirl.attributes_for(:user)
+        post :create, params: { user: FactoryGirl.attributes_for(:user) }
         expect(response).to redirect_to admin_dashboard_user_path(User.last)
       end
     end
@@ -60,12 +60,12 @@ RSpec.describe Web::Admin::Dashboard::UsersController, :type => :controller do
     context "when user attributes are invalid" do
       it "doesn't save a new user" do
         expect{
-          post :create, user: FactoryGirl.attributes_for(:user, email: "")
+          post :create, params: { user: FactoryGirl.attributes_for(:user, email: "") }
         }.to_not change(User, :count)
       end
 
       it "renders new method" do
-        post :create, user: FactoryGirl.attributes_for(:user, email: "")
+        post :create, params: { user: FactoryGirl.attributes_for(:user, email: "") }
         expect(response).to render_template('new')
       end
     end
@@ -78,26 +78,26 @@ RSpec.describe Web::Admin::Dashboard::UsersController, :type => :controller do
 
     context "when new attributes are valid" do
       it "changes @user's attributes" do
-        put :update, id: @user, user: FactoryGirl.attributes_for(:user, email: "newemail@example.com")
+        put :update, params: { id: @user, user: FactoryGirl.attributes_for(:user, email: "newemail@example.com") }
         @user.reload
         expect(@user.email).to eq("newemail@example.com")
       end
 
       it "redirects to @user updated page" do
-        put :update, id: @user, user: FactoryGirl.attributes_for(:user, email: "newemail@example.com")
+        put :update, params: { id: @user, user: FactoryGirl.attributes_for(:user, email: "newemail@example.com") }
         expect(response).to redirect_to(admin_dashboard_user_path(@user))
       end
     end
 
     context "when new attributes are invalid" do
       it "doesnt change @user's attributes" do
-        put :update, id: @user, user: FactoryGirl.attributes_for(:user, email: "")
+        put :update, params: { id: @user, user: FactoryGirl.attributes_for(:user, email: "") }
         @user.reload
         expect(@user.email).to eq("user1@example.com")
       end
 
       it "renders edit methond" do
-        put :update, id: @user, user: FactoryGirl.attributes_for(:user, email: "")
+        put :update, params: { id: @user, user: FactoryGirl.attributes_for(:user, email: "") }
         expect(response).to render_template('edit')
       end
     end
@@ -110,12 +110,12 @@ RSpec.describe Web::Admin::Dashboard::UsersController, :type => :controller do
 
     it "deletes user" do
       expect{
-        delete :destroy, id: @user
+        delete :destroy, params: { id: @user }
       }.to change(User, :count).by(-1)
     end
 
     it "redirect to users page" do
-      delete :destroy, id: @user
+      delete :destroy, params: { id: @user }
       expect(response).to redirect_to(admin_dashboard_users_path)
     end
   end

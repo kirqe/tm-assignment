@@ -23,12 +23,12 @@ RSpec.describe Web::Admin::Dashboard::TasksController, :type => :controller do
 
   describe "GET #show" do
     it "assigns the selected task to @task" do
-      get :show, id: task
+      get :show, params: { id: task }
       expect(assigns(:task)).to eq(task)
     end
 
     it "render :show view" do
-      get :show, id: task
+      get :show, params: { id: task }
       expect(response).to render_template("show")
     end
   end
@@ -49,12 +49,12 @@ RSpec.describe Web::Admin::Dashboard::TasksController, :type => :controller do
     context "when task attributes are valid" do
       it "creates a new task" do
         expect{
-           post :create, task: FactoryGirl.attributes_for(:task, user_id: user.id)
+           post :create, params: { task: FactoryGirl.attributes_for(:task, user_id: user.id) }
         }.to change(user.tasks, :count).by(1)
       end
 
       it "redirects to task details page" do
-        post :create, task: FactoryGirl.attributes_for(:task, user_id: user.id)
+        post :create, params: { task: FactoryGirl.attributes_for(:task, user_id: user.id) }
         expect(response).to redirect_to admin_dashboard_task_path(Task.last)
       end
     end
@@ -62,12 +62,12 @@ RSpec.describe Web::Admin::Dashboard::TasksController, :type => :controller do
     context "when task attributes are invalid" do
       it "doesn't save a new task" do
         expect{
-          post :create, task: FactoryGirl.attributes_for(:task, name: "")
+          post :create, params: { task: FactoryGirl.attributes_for(:task, name: "") }
         }.to_not change(Task, :count)
       end
 
       it "renders new action" do
-        post :create, task: FactoryGirl.attributes_for(:task)
+        post :create, params: { task: FactoryGirl.attributes_for(:task) }
         expect(response).to render_template("new")
       end
     end
@@ -80,26 +80,26 @@ RSpec.describe Web::Admin::Dashboard::TasksController, :type => :controller do
 
     context "when new attributes are valid" do
       it "changes @task attributes" do
-        put :update, id: @task, task: FactoryGirl.attributes_for(:task, user_id: user.id, name: "task 2")
+        put :update, params: { id: @task, task: FactoryGirl.attributes_for(:task, user_id: user.id, name: "task 2") }
         @task.reload
         @task.name.should eq("task 2")
       end
 
       it "redirects to @task updated page" do
-        put :update, id: @task, task: FactoryGirl.attributes_for(:task, user_id: user.id, name: "task 2")
+        put :update, params: { id: @task, task: FactoryGirl.attributes_for(:task, user_id: user.id, name: "task 2") }
         expect(response).to redirect_to(admin_dashboard_task_path(@task))
       end
     end
 
     context "when new attributes are invalid" do
       it "it doesn't change @task's attributes" do
-        put :update, id: @task, task: FactoryGirl.attributes_for(:task, user_id: user.id, name: "")
+        put :update, params: { id: @task, task: FactoryGirl.attributes_for(:task, user_id: user.id, name: "") }
         @task.reload
         @task.name.should eq("task 1")
       end
 
       it "renders renders edit medhod" do
-        put :update, id: @task, task: FactoryGirl.attributes_for(:task, user_id: user.id, name: "")
+        put :update, params: { id: @task, task: FactoryGirl.attributes_for(:task, user_id: user.id, name: "") }
         expect(response).to render_template('edit')
       end
     end
@@ -112,12 +112,12 @@ RSpec.describe Web::Admin::Dashboard::TasksController, :type => :controller do
 
     it "deletes task" do
       expect{
-        delete :destroy, id: @task
+        delete :destroy, params: { id: @task }
       }.to change(Task, :count).by(-1)
     end
 
     it "redirects to tasks page" do
-      delete :destroy, id: @task
+      delete :destroy, params: { id: @task }
       expect(response).to redirect_to(admin_dashboard_tasks_path)
     end
   end

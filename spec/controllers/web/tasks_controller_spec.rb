@@ -47,7 +47,7 @@ RSpec.describe Web::TasksController, :type => :controller do
       end
 
       it "change the state of task to started" do
-        put :start, id: task
+        put :start, params: { id: task }
         task.reload
         expect(task.state).to eq "started"
       end
@@ -57,9 +57,9 @@ RSpec.describe Web::TasksController, :type => :controller do
       before(:each) do
         login_as(user2)
       end
-      
+
       it "change the state of task to started" do
-        put :start, id: task
+        put :start, params: { id: task }
         task.reload
         expect(task.state).to eq "new"
       end
@@ -71,7 +71,7 @@ RSpec.describe Web::TasksController, :type => :controller do
       end
 
       it "change the state of task to started" do
-        put :start, id: task
+        put :start, params: { id: task }
         task.reload
         expect(task.state).to eq "started"
       end
@@ -90,7 +90,7 @@ RSpec.describe Web::TasksController, :type => :controller do
       end
 
       it "change the state of task to started" do
-        put :finish, id: task
+        put :finish, params: { id: task }
         task.reload
         expect(task.state).to eq "finished"
       end
@@ -102,7 +102,7 @@ RSpec.describe Web::TasksController, :type => :controller do
       end
 
       it "change the state of task to started" do
-        put :finish, id: task
+        put :finish, params: { id: task }
         task.reload
         expect(task.state).to eq "started"
       end
@@ -114,7 +114,7 @@ RSpec.describe Web::TasksController, :type => :controller do
       end
 
       it "change the state of task to started" do
-        put :finish, id: task
+        put :finish, params: { id: task }
         task.reload
         expect(task.state).to eq "finished"
       end

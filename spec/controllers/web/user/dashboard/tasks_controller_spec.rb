@@ -22,12 +22,12 @@ RSpec.describe Web::User::Dashboard::TasksController, :type => :controller do
 
   describe "GET #show" do
     it "assigns the selected task to @task" do
-      get :show, id: task
+      get :show, params: { id: task }
       expect(assigns(:task)).to eq(task)
     end
 
     it "renders :show view" do
-      get :show, id: task
+      get :show, params: { id: task }
       expect(response).to render_template('show')
     end
   end
@@ -48,12 +48,12 @@ RSpec.describe Web::User::Dashboard::TasksController, :type => :controller do
     context "when task attributes are valid" do
       it "crates a new task to current user" do
         expect{
-           post :create, task: FactoryGirl.attributes_for(:task, user_id: user.id)
+           post :create, params: { task: FactoryGirl.attributes_for(:task, user_id: user.id) }
         }.to change(user.tasks, :count).by(1)
       end
 
       it "redirects to created task details page" do
-        post :create, task: FactoryGirl.attributes_for(:task, user_id: user.id)
+        post :create, params: { task: FactoryGirl.attributes_for(:task, user_id: user.id) }
         expect(response).to redirect_to dashboard_user_task_path(user, user.tasks.last)
       end
     end
@@ -61,12 +61,12 @@ RSpec.describe Web::User::Dashboard::TasksController, :type => :controller do
     context "when task attributes are invalid" do
       it "doesn't save a new task" do
         expect{
-          post :create, task: FactoryGirl.attributes_for(:task, name: "")
+          post :create, params: { task: FactoryGirl.attributes_for(:task, name: "") }
         }.to_not change(Task, :count)
       end
 
       it "renders new action" do
-        post :create, task: FactoryGirl.attributes_for(:task, name: "")
+        post :create, params: { task: FactoryGirl.attributes_for(:task, name: "") }
         expect(response).to render_template("new")
       end
     end
