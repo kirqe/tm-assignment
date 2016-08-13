@@ -46,27 +46,31 @@ RSpec.describe Web::User::Dashboard::TasksController, :type => :controller do
 
   describe "POST #create" do
     context "when task attributes are valid" do
+      let(:valid_attributes) { FactoryGirl.attributes_for(:task, user_id: user.id) }
+
       it "crates a new task to current user" do
         expect{
-           post :create, params: { task: FactoryGirl.attributes_for(:task, user_id: user.id) }
+           post :create, params: { task: valid_attributes }
         }.to change(user.tasks, :count).by(1)
       end
 
       it "redirects to created task details page" do
-        post :create, params: { task: FactoryGirl.attributes_for(:task, user_id: user.id) }
+        post :create, params: { task: valid_attributes }
         expect(response).to redirect_to dashboard_user_task_path(user, user.tasks.last)
       end
     end
 
     context "when task attributes are invalid" do
+      let(:invalid_attributes) { FactoryGirl.attributes_for(:task, name: "") }
+
       it "doesn't save a new task" do
         expect{
-          post :create, params: { task: FactoryGirl.attributes_for(:task, name: "") }
+          post :create, params: { task: invalid_attributes }
         }.to_not change(Task, :count)
       end
 
       it "renders new action" do
-        post :create, params: { task: FactoryGirl.attributes_for(:task, name: "") }
+        post :create, params: { task: invalid_attributes }
         expect(response).to render_template("new")
       end
     end

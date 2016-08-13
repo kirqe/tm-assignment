@@ -47,27 +47,31 @@ RSpec.describe Web::Admin::Dashboard::TasksController, :type => :controller do
 
   describe "POST #create" do
     context "when task attributes are valid" do
+      let(:valid_attributes) { FactoryGirl.attributes_for(:task, user_id: user.id) }
+
       it "creates a new task" do
         expect{
-           post :create, params: { task: FactoryGirl.attributes_for(:task, user_id: user.id) }
+           post :create, params: { task: valid_attributes }
         }.to change(user.tasks, :count).by(1)
       end
 
       it "redirects to task details page" do
-        post :create, params: { task: FactoryGirl.attributes_for(:task, user_id: user.id) }
+        post :create, params: { task: valid_attributes }
         expect(response).to redirect_to admin_dashboard_task_path(Task.last)
       end
     end
 
     context "when task attributes are invalid" do
+      let(:invalid_attributes) { FactoryGirl.attributes_for(:task) }
+
       it "doesn't save a new task" do
         expect{
-          post :create, params: { task: FactoryGirl.attributes_for(:task, name: "") }
+          post :create, params: { task: invalid_attributes }
         }.to_not change(Task, :count)
       end
 
       it "renders new action" do
-        post :create, params: { task: FactoryGirl.attributes_for(:task) }
+        post :create, params: { task: invalid_attributes }
         expect(response).to render_template("new")
       end
     end
@@ -79,27 +83,31 @@ RSpec.describe Web::Admin::Dashboard::TasksController, :type => :controller do
     end
 
     context "when new attributes are valid" do
+      let(:valid_attributes) { FactoryGirl.attributes_for(:task, user_id: user.id, name: "task 2") }
+
       it "changes @task attributes" do
-        put :update, params: { id: @task, task: FactoryGirl.attributes_for(:task, user_id: user.id, name: "task 2") }
+        put :update, params: { id: @task, task: valid_attributes }
         @task.reload
         @task.name.should eq("task 2")
       end
 
       it "redirects to @task updated page" do
-        put :update, params: { id: @task, task: FactoryGirl.attributes_for(:task, user_id: user.id, name: "task 2") }
+        put :update, params: { id: @task, task: valid_attributes }
         expect(response).to redirect_to(admin_dashboard_task_path(@task))
       end
     end
 
     context "when new attributes are invalid" do
+      let(:invalid_attributes) { FactoryGirl.attributes_for(:task, user_id: user.id, name: "") }
+
       it "it doesn't change @task's attributes" do
-        put :update, params: { id: @task, task: FactoryGirl.attributes_for(:task, user_id: user.id, name: "") }
+        put :update, params: { id: @task, task: invalid_attributes }
         @task.reload
         @task.name.should eq("task 1")
       end
 
       it "renders renders edit medhod" do
-        put :update, params: { id: @task, task: FactoryGirl.attributes_for(:task, user_id: user.id, name: "") }
+        put :update, params: { id: @task, task: invalid_attributes }
         expect(response).to render_template('edit')
       end
     end

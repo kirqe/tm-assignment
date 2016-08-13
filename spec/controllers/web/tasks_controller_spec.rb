@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Web::TasksController, :type => :controller do
+  let(:user1) { FactoryGirl.create(:user, role: 'user') }
+  let(:user2) { FactoryGirl.create(:user, role: 'user') }
+  let(:admin_user) { FactoryGirl.create(:user, role: 'admin') }
 
   describe "GET #index" do
     context "when user logged in as admin" do
-      let(:admin_user) { FactoryGirl.create(:user, role: 'admin') }
       before(:each) do
         login_as(admin_user)
       end
@@ -16,14 +18,13 @@ RSpec.describe Web::TasksController, :type => :controller do
     end
 
     context "when user logged in as a regular user" do
-      let(:user) { FactoryGirl.create(:user, role: 'user') }
       before(:each) do
-        login_as(user)
+        login_as(user1)
       end
 
       it "redirects a regular user to dashboard_user_tasks_path" do
         get :index
-        expect(response).to redirect_to dashboard_user_tasks_path(user)
+        expect(response).to redirect_to dashboard_user_tasks_path(user1)
       end
     end
 
@@ -36,10 +37,7 @@ RSpec.describe Web::TasksController, :type => :controller do
   end
 
   describe "PUT #start" do
-    let(:user1) { FactoryGirl.create(:user, role: 'user') }
-    let(:user2) { FactoryGirl.create(:user, role: 'user') }
     let(:task) { FactoryGirl.create(:task, user_id: user1.id) }
-    let(:admin_user) { FactoryGirl.create(:user, role: 'admin') }
 
     context "when task belongs to the current user" do
       before(:each) do
@@ -79,10 +77,7 @@ RSpec.describe Web::TasksController, :type => :controller do
   end
 
   describe "PUT #finish" do
-    let(:user1) { FactoryGirl.create(:user, role: 'user') }
-    let(:user2) { FactoryGirl.create(:user, role: 'user') }
     let(:task) { FactoryGirl.create(:task, user_id: user1.id, state: "started") }
-    let(:admin_user) { FactoryGirl.create(:user, role: 'admin') }
 
     context "when task belongs to the current user" do
       before(:each) do
