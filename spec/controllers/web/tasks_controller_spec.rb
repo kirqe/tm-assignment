@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Web::TasksController, :type => :controller do
 
-  #GET index
   describe "GET #index" do
     context "when user logged in as admin" do
       let(:admin_user) { FactoryGirl.create(:user, role: 'admin') }
@@ -36,7 +35,6 @@ RSpec.describe Web::TasksController, :type => :controller do
     end
   end
 
-  #PUT start
   describe "PUT #start" do
     let(:user1) { FactoryGirl.create(:user, role: 'user') }
     let(:user2) { FactoryGirl.create(:user, role: 'user') }
@@ -47,6 +45,7 @@ RSpec.describe Web::TasksController, :type => :controller do
       before(:each) do
         login_as(user1)
       end
+
       it "change the state of task to started" do
         put :start, id: task
         task.reload
@@ -58,6 +57,7 @@ RSpec.describe Web::TasksController, :type => :controller do
       before(:each) do
         login_as(user2)
       end
+      
       it "change the state of task to started" do
         put :start, id: task
         task.reload
@@ -69,6 +69,7 @@ RSpec.describe Web::TasksController, :type => :controller do
       before(:each) do
         login_as(admin_user)
       end
+
       it "change the state of task to started" do
         put :start, id: task
         task.reload
@@ -77,7 +78,6 @@ RSpec.describe Web::TasksController, :type => :controller do
     end
   end
 
-  #PUT finish
   describe "PUT #finish" do
     let(:user1) { FactoryGirl.create(:user, role: 'user') }
     let(:user2) { FactoryGirl.create(:user, role: 'user') }
@@ -88,6 +88,7 @@ RSpec.describe Web::TasksController, :type => :controller do
       before(:each) do
         login_as(user1)
       end
+
       it "change the state of task to started" do
         put :finish, id: task
         task.reload
@@ -99,6 +100,7 @@ RSpec.describe Web::TasksController, :type => :controller do
       before(:each) do
         login_as(user2)
       end
+
       it "change the state of task to started" do
         put :finish, id: task
         task.reload
@@ -110,6 +112,7 @@ RSpec.describe Web::TasksController, :type => :controller do
       before(:each) do
         login_as(admin_user)
       end
+
       it "change the state of task to started" do
         put :finish, id: task
         task.reload

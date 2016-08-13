@@ -10,6 +10,9 @@ class Web::User::Dashboard::TasksController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def new
     @task = Task.new
   end
@@ -27,9 +30,6 @@ class Web::User::Dashboard::TasksController < ApplicationController
         format.json { render json: @task.errorsk, status: :unprocessable_entity }
       end
     end
-  end
-
-  def show
   end
 
   private
