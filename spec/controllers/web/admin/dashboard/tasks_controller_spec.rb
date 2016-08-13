@@ -118,15 +118,15 @@ RSpec.describe Web::Admin::Dashboard::TasksController, :type => :controller do
       @task = FactoryGirl.create(:task, user_id: @user.id)
       login_as(admin_user)
     end
+
     context "when task is valid" do
       it "updates the task successfully" do
-
         put :update, id: @task, task: FactoryGirl.attributes_for(:task, name: "qqqqqqqq")
         @task.reload
         @task.name.should eq("qqqqqqqq")
       end
-
     end
+
     context "when task is invalid" do
       it "renders renders template edit" do
         put :update, id: @task, task: FactoryGirl.attributes_for(:task, name: "")
@@ -138,7 +138,6 @@ RSpec.describe Web::Admin::Dashboard::TasksController, :type => :controller do
   #DELETE delete
   describe "DELETE #destroy" do
     let(:admin_user) { FactoryGirl.create(:user, role: 'admin') }
-    
     before(:each) do
       @user = FactoryGirl.create(:user, role: 'user')
       @task = FactoryGirl.create(:task, user_id: @user.id)
@@ -150,6 +149,4 @@ RSpec.describe Web::Admin::Dashboard::TasksController, :type => :controller do
       }.to change(Task, :count).by(-1)
     end
   end
-
-
 end
