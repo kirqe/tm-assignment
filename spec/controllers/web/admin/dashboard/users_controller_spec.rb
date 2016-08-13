@@ -77,13 +77,13 @@ RSpec.describe Web::Admin::Dashboard::UsersController, :type => :controller do
     end
 
     context "when new attributes are valid" do
-      it "change @user's attributes" do
+      it "changes @user's attributes" do
         put :update, id: @user, user: FactoryGirl.attributes_for(:user, email: "newemail@example.com")
         @user.reload
         expect(@user.email).to eq("newemail@example.com")
       end
 
-      it "redirect to @user updated user page" do
+      it "redirects to @user updated page" do
         put :update, id: @user, user: FactoryGirl.attributes_for(:user, email: "newemail@example.com")
         expect(response).to redirect_to(admin_dashboard_user_path(@user))
       end
@@ -103,7 +103,7 @@ RSpec.describe Web::Admin::Dashboard::UsersController, :type => :controller do
     end
   end
 
-  describe "DELETE delete" do
+  describe "DELETE #delete" do
     before(:each) do
       @user = FactoryGirl.create(:user, role: 'user')
     end

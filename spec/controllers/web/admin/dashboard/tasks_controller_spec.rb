@@ -1,152 +1,124 @@
 require 'rails_helper'
 
 RSpec.describe Web::Admin::Dashboard::TasksController, :type => :controller do
+  let(:user) { FactoryGirl.create(:user, role: 'user') }
+  let(:task) { FactoryGirl.create(:task, user_id: user.id) }
+  let(:admin_user) { FactoryGirl.create(:user, role: 'admin') }
+  before(:each) do
+    admin_user = FactoryGirl.create(:user, role: 'admin')
+    login_as(admin_user)
+  end
 
-  #GET index
   describe "GET #index" do
-    let(:user) { FactoryGirl.create(:user, role: 'user') }
-    let(:task) { FactoryGirl.create(:task, user_id: user.id) }
-
-    context "when user is authenticated as ADMIN" do
-      before(:each) do
-        admin_user = FactoryGirl.create(:user, role: 'admin')
-        login_as(admin_user)
-      end
-
-      it "assigns @tasks" do
-        get :index
-        expect(assigns(:tasks)).to eq([task])
-      end
-
-      it "renders :index template" do
-        get :index
-        expect(response).to render_template("index")
-      end
+    it "assigns all tasks to @tasks" do
+      get :index
+      expect(assigns(:tasks)).to eq([task])
     end
 
-    context "when user is authenticated as a REGULAR USER" do
-      before(:each) do
-        user = FactoryGirl.create(:user, role: 'user')
-        login_as(user)
-      end
-
-      it "redirects a regular user to user's dashboard" do
-        get :index
-        expect(response).to redirect_to dashboard_tasks_path
-      end
-    end
-
-    context "when user is not authenticated" do
-      it "redirects user to login_path" do
-        get :index
-        expect(response).to redirect_to login_path
-      end
+    it "renders :index template" do
+      get :index
+      expect(response).to render_template("index")
     end
   end
 
-  #GET show
   describe "GET #show" do
-    let(:user) { FactoryGirl.create(:user, role: 'user') }
-    let(:task) { FactoryGirl.create(:task, user_id: user.id) }
-    let(:admin_user) { FactoryGirl.create(:user, role: 'admin') }
-    before(:each) do
-      login_as(admin_user)
-    end
-
-    it "render :show template" do
-      get :show, id: task
-      expect(response).to render_template("show")
-    end
-
-    it "assigns @task to template" do
+    it "assigns the selected task to @task" do
       get :show, id: task
       expect(assigns(:task)).to eq(task)
     end
+
+    it "render :show view" do
+      get :show, id: task
+      expect(response).to render_template("show")
+    end
   end
 
-  #GET new
   describe "GET #new" do
-    let(:admin_user) { FactoryGirl.create(:user, role: 'admin') }
-    before(:each) do
-      login_as(admin_user)
+    it "assigns a new task to @task" do
+      get :new
+      expect(assigns(:task)).to be_a_new(Task)
     end
 
-    context "when user logged in as ADMIN" do
-      it "assigns a new task to @task" do
-        get :new
-        expect(assigns(:task)).to be_a_new(Task)
-      end
+    it "renders new method" do
+      get :new
+      expect(response).to render_template('new')
     end
   end
 
-  #POST create
   describe "POST #create" do
-    let(:admin_user) { FactoryGirl.create(:user, role: 'admin') }
-    let(:user) { FactoryGirl.create(:user, role: 'user') }
-    let(:valid_task) { FactoryGirl.attributes_for(:task, user_id: user.id) }
-    let(:invalid_task) { FactoryGirl.attributes_for(:task) }
-    before(:each) do
-      login_as(admin_user)
-    end
-
-    context "when task is valid" do
-      it "adds a new task to selected user" do
+    context "when task attributes are valid" do
+      it "creates a new task" do
         expect{
-           post :create, task: valid_task
+           post :create, task: FactoryGirl.attributes_for(:task, user_id: user.id)
         }.to change(user.tasks, :count).by(1)
       end
+
       it "redirects to task details page" do
-        post :create, task: valid_task
-        expect(response).to redirect_to admin_dashboard_task_path(user.tasks.last)
+        post :create, task: FactoryGirl.attributes_for(:task, user_id: user.id)
+        expect(response).to redirect_to admin_dashboard_task_path(Task.last)
       end
     end
 
-    context "when task is invalid" do
+    context "when task attributes are invalid" do
+      it "doesn't save a new task" do
+        expect{
+          post :create, task: FactoryGirl.attributes_for(:task, name: "")
+        }.to_not change(Task, :count)
+      end
+
       it "renders new action" do
-        post :create, task: invalid_task
+        post :create, task: FactoryGirl.attributes_for(:task)
         expect(response).to render_template("new")
       end
     end
   end
 
-  #PUT update
   describe "PUT #update" do
-    let(:admin_user) { FactoryGirl.create(:user, role: 'admin') }
-
     before(:each) do
-      @user = FactoryGirl.create(:user, role: 'user')
-      @task = FactoryGirl.create(:task, user_id: @user.id)
-      login_as(admin_user)
+      @task = FactoryGirl.create(:task, user_id: user.id, name: "task 1")
     end
 
-    context "when task is valid" do
-      it "updates the task successfully" do
-        put :update, id: @task, task: FactoryGirl.attributes_for(:task, name: "qqqqqqqq")
+    context "when new attributes are valid" do
+      it "changes @task attributes" do
+        put :update, id: @task, task: FactoryGirl.attributes_for(:task, user_id: user.id, name: "task 2")
         @task.reload
-        @task.name.should eq("qqqqqqqq")
+        @task.name.should eq("task 2")
+      end
+
+      it "redirects to @task updated page" do
+        put :update, id: @task, task: FactoryGirl.attributes_for(:task, user_id: user.id, name: "task 2")
+        expect(response).to redirect_to(admin_dashboard_task_path(@task))
       end
     end
 
-    context "when task is invalid" do
-      it "renders renders template edit" do
-        put :update, id: @task, task: FactoryGirl.attributes_for(:task, name: "")
+    context "when new attributes are invalid" do
+      it "it doesn't change @task's attributes" do
+        put :update, id: @task, task: FactoryGirl.attributes_for(:task, user_id: user.id, name: "")
+        @task.reload
+        @task.name.should eq("task 1")
+      end
+
+      it "renders renders edit medhod" do
+        put :update, id: @task, task: FactoryGirl.attributes_for(:task, user_id: user.id, name: "")
         expect(response).to render_template('edit')
       end
     end
   end
 
-  #DELETE delete
   describe "DELETE #destroy" do
-    let(:admin_user) { FactoryGirl.create(:user, role: 'admin') }
     before(:each) do
-      @user = FactoryGirl.create(:user, role: 'user')
-      @task = FactoryGirl.create(:task, user_id: @user.id)
-      login_as(admin_user)
+      @task = FactoryGirl.create(:task, user_id: user.id)
     end
-    it "deletes task successfully" do
+
+    it "deletes task" do
       expect{
         delete :destroy, id: @task
       }.to change(Task, :count).by(-1)
+    end
+
+    it "redirects to tasks page" do
+      delete :destroy, id: @task
+      expect(response).to redirect_to(admin_dashboard_tasks_path)
     end
   end
 end
