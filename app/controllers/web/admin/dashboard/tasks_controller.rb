@@ -3,9 +3,9 @@ class Web::Admin::Dashboard::TasksController < Web::Admin::AdminController
 
   def index
     if (params[:user_id])
-      @tasks = Task.where(user_id: params[:user_id]).page params[:page]
+      @tasks = Task.sort_by_user_and_date(params[:user_id]).page params[:page]
     else
-      @tasks = Task.all.page params[:page]
+      @tasks = Task.sort_by_date.page params[:page]
     end
   end
 

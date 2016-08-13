@@ -12,8 +12,16 @@ User.create(
   role: 'admin'
 )
 
-User.create(
+demo_user = User.create(
   email: 'user@example.com',
   password: 'user12345',
   role: 'user'
 )
+
+7.times do
+  Task.create(
+    name: FFaker::Lorem.phrase(5),
+    description: FFaker::Lorem.paragraph,
+    user: demo_user
+  )
+end
