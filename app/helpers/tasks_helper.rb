@@ -16,7 +16,7 @@ module TasksHelper
                   content_tag :i, '', class: "fa #{icon} fa-fw"
                 end
 
-    if (task.user == current_user || @current_user.is_admin?)
+    if (task.user == @current_user || @current_user.is_admin?)
       status_label + " " + controlls
     else
       status_label
