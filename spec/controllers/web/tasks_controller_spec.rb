@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Web::TasksController, :type => :controller do
 
+  #GET index
   describe "GET #index" do
-
     context "when user logged in as admin" do
       let(:admin_user) { FactoryGirl.create(:user, role: 'admin') }
       before(:each) do
@@ -36,7 +36,8 @@ RSpec.describe Web::TasksController, :type => :controller do
     end
   end
 
-  describe "start task action" do
+  #PUT start
+  describe "PUT #start" do
     let(:user1) { FactoryGirl.create(:user, role: 'user') }
     let(:user2) { FactoryGirl.create(:user, role: 'user') }
     let(:task) { FactoryGirl.create(:task, user_id: user1.id) }
@@ -76,7 +77,8 @@ RSpec.describe Web::TasksController, :type => :controller do
     end
   end
 
-  describe "finish task action" do
+  #PUT finish
+  describe "PUT #finish" do
     let(:user1) { FactoryGirl.create(:user, role: 'user') }
     let(:user2) { FactoryGirl.create(:user, role: 'user') }
     let(:task) { FactoryGirl.create(:task, user_id: user1.id, state: "started") }
