@@ -23,6 +23,6 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
-    redirect_to dashboard_tasks_path, notice: "Logged out successfully"
+    redirect_to login_path, notice: "Logged out successfully"
   end
 end
