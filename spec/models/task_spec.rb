@@ -28,5 +28,4 @@ RSpec.describe Task, :type => :model do
       expect(task.state).to eq("finished")
     end
   end
-
 end

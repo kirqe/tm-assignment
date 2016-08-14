@@ -43,9 +43,3 @@ group :development do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-#
-# # still using 10.8.5 -_-
-# require 'rbconfig'
-# if RbConfig::CONFIG['target_os'] =~ /darwin(1[0-3])/i
-#   gem 'rb-fsevent', '<= 0.9.4'
-# end

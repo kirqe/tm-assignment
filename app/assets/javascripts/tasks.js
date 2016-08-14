@@ -15,6 +15,7 @@ var markStarted = function(task){
     }
   });
 }
+
 var markFinished = function(task){
   var task_id = task.data("id")
   var aevent = task.data("aevent");
