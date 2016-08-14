@@ -35,7 +35,7 @@ module TasksHelper
   end
 
   def attachment(task)
-    file = %w(pdf doc docx)
+    file = %w(pdf doc docx txt)
     image = %w(jpg jpeg gif png)
 
     if task.attachment.present?
