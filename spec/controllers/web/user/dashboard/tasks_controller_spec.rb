@@ -8,7 +8,6 @@ RSpec.describe Web::User::Dashboard::TasksController, :type => :controller do
   end
 
   describe "GET #index" do
-
     it "assigns all tasks to @tasks" do
       get :index
       expect(assigns(:tasks)).to eq([task])

@@ -5,7 +5,6 @@ RSpec.describe Web::Admin::Dashboard::TasksController, :type => :controller do
   let(:task) { FactoryGirl.create(:task, user_id: user.id) }
   let(:admin_user) { FactoryGirl.create(:user, role: 'admin') }
   before(:each) do
-    admin_user = FactoryGirl.create(:user, role: 'admin')
     login_as(admin_user)
   end
 

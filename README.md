@@ -4,7 +4,9 @@
 
 ![Imgur](http://i.imgur.com/DrITVxD.jpg)
 
+![condecoverage](public/src/condecoverage.png)
+
 1. `rake fake_data` to add fake tasks and users
-2. `rake db:seed` to add admin and demo users with a few tasks
+2. `rake db:seed` to add admin and demo user with a few tasks
 
 ![User dashboard](public/src/user_dash.png)

@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe Task, :type => :model do
   it { should belong_to :user }
   it { should validate_presence_of :name }
+  it { should validate_length_of(:name).is_at_least(3).is_at_most(100)}
   it { should validate_presence_of :description }
+  it { should validate_length_of(:description).is_at_least(3).is_at_most(10000)}
 
   it "has a valid factory" do
     user = FactoryGirl.create(:user, role: 'user')
