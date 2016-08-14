@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Logging in and out", :type => :feature do
+RSpec.describe "Logging in and out", :type => :feature do
   before(:each) do
     FactoryGirl.create(:user, email: "valid@example.com", password: "12345678")
   end
