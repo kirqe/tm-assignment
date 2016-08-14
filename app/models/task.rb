@@ -19,7 +19,7 @@ class Task < ApplicationRecord
   validates :name, presence: true, length: {in: 3..100}
   validates :description, presence: true, length: {in: 3..10000}
 
-  scope :sort_by_finished, -> { order('state DESC')  }
-  scope :sort_by_date, -> { order('created_at DESC') }
-  scope :sort_by_user_and_date, -> (user_id){ where(user_id: user_id).order('created_at DESC')}
+  scope :order_by_finished, -> { order('state DESC')  }
+  scope :order_by_date, -> { order('created_at DESC') }
+  scope :order_by_user_and_date, -> (user_id){ where(user_id: user_id).order('created_at DESC')}
 end
