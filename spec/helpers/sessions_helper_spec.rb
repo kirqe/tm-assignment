@@ -17,13 +17,13 @@ RSpec.describe SessionsHelper, :type => :helper do
         expect(current_user).to eq(user)
       end
     end
+    
     context "@current is not empty" do
       it "returns itself" do
         @current_user = user
         expect(current_user).to eq(user)
       end
     end
-
   end
 
   describe "logged_in?" do

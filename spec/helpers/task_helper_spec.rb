@@ -11,7 +11,7 @@ RSpec.describe TasksHelper, :type => :helper do
       it "returns controlls for task" do
         @current_user = user1
         controlls = task_controlls(task)
-        controlls.should have_css("i", "fa-play")
+        controlls.should have_css("i.fa-play")
       end
     end
 
@@ -19,7 +19,7 @@ RSpec.describe TasksHelper, :type => :helper do
       it "doesn't return controlls for task" do
         @current_user = user2
         controlls = task_controlls(task)
-        controlls.should_not have_css("i", "fa-play")
+        controlls.should_not have_css("i.fa-play")
       end
     end
 
@@ -27,7 +27,7 @@ RSpec.describe TasksHelper, :type => :helper do
       it "doesn't return controlls for task" do
         @current_user = admin
         controlls = task_controlls(task)
-        controlls.should have_css("i", "fa-play")
+        controlls.should have_css("i.fa-play")
       end
     end
   end
@@ -74,11 +74,11 @@ RSpec.describe TasksHelper, :type => :helper do
     it "returns attachment icon if file attached" do
       task = FactoryGirl.create(:task, user_id: user1.id,
        attachment: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'attachments', 'image.png')) )
-       expect(has_attachment?(task)).to have_css("i", "fa-paperclip")
+       expect(has_attachment?(task)).to have_css("i.fa-paperclip")
     end
 
     it "doesn't return attachment icon if file is not attached" do
-       expect(has_attachment?(task)).to_not have_css("i", "fa-paperclip")
+       expect(has_attachment?(task)).to_not have_css("i.fa-paperclip")
     end
   end
 end

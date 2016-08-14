@@ -27,6 +27,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5'
   gem 'capybara'
+  gem 'selenium-webdriver'
   gem 'rails-controller-testing'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'

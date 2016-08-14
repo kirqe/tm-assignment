@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Logging in", :type => :feature do
+RSpec.feature "Logging in and out", :type => :feature do
   before(:each) do
     FactoryGirl.create(:user, email: "valid@example.com", password: "12345678")
   end
@@ -19,5 +19,14 @@ RSpec.feature "Logging in", :type => :feature do
     fill_in 'Password', with: "12345678"
     click_button 'Login'
     expect(page).to have_content('Invalid email or password')
+  end
+
+  scenario "logout" do
+    visit login_path
+    fill_in 'Email', with: "valid@example.com"
+    fill_in 'Password', with: "12345678"
+    click_button 'Login'
+    click_link 'Log out'
+    expect(page).to have_content("Logged out successfully")
   end
 end
