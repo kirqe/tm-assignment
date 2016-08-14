@@ -5,7 +5,7 @@ rvm:
 script:
 - export RAILS_ENV=test
 - bundle exec rake db:create db:schema:load db:test:prepare
-- bundle exec xvfb-run rspec
+- xvfb-run --server-args="-screen 0 1024x768x24" bundle exec rspec spec/
 before_script:
 - psql -c 'create database tm_test;' -U postgres
 services:
