@@ -1,6 +1,6 @@
 # task manager assignment
 
-[![Build Status](https://travis-ci.com/railsr/tm-assignment.svg?token=CdiZNoKipqHTgrqvSJCF&branch=master)](https://travis-ci.com/railsr/tm-assignment)
+[![Build Status](https://travis-ci.org/railsr/tm-assignment.svg?branch=master)](https://travis-ci.org/railsr/tm-assignment)
 
 ![Imgur](http://i.imgur.com/DrITVxD.jpg)
 
